@@ -25,7 +25,7 @@
           <USelect placeholder="Category" :options="categories" v-model="state.category" />
         </UFormGroup>
 
-        <UButton type="submit" color="black" variant="solid" label="Save" />
+        <UButton type="submit" color="black" variant="solid" label="Save" :loading="isLoading" />
       </UForm>
     </UCard>
   </UModal>
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { categories, types } from '~/constants/transaction';
-import { z } from 'zod'
+import { unknown, z } from 'zod'
 
 const props = defineProps({
   modelValue: Boolean
@@ -63,12 +63,39 @@ const schema = z.intersection(
   defaultSchema
 )
 const form = ref()
+const isLoading = ref(false)
+const supabase = useSupabaseClient()
+const toast = useToast()
 const save = async () => {
   if (form.value.errors.length) return
   // form.value.validate()
+  isLoading.value = true
+  try {
+    const { error } = await supabase.from('transactions')
+      .upsert({ ...state.value as any })
+    if (!error) {
+      toast.add({
+        'title': 'Transaction saved',
+        'icon': 'i-heroicons-check-circle'
+      })
+      isOpen.value = false
+      emit('saved')
+      return
+    }
+    throw error
+  } catch (e : any) {
+    toast.add({
+      title: 'Transaction not saved',
+      description: e.message,
+      icon: 'i-heroicons-exclamation-circle',
+      color: 'red'
+    })
+  } finally {
+    isLoading.value = false
+  }
 }
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'saved'])
 const initialState = {
   type: undefined,
   amount: 0,
