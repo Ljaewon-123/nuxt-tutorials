@@ -32,7 +32,7 @@
     <div v-for="(transactionsOnDay, date) in byDate" :key="date" class="mb-10">
       <DailyTransactionSummary :date="(date as any)" :transactions="transactionsOnDay" />
       <Transaction v-for="transaction in transactionsOnDay" :key="transaction.id" :transaction="transaction"
-      @deleted="refresh()" />
+      @deleted="refresh()" @edited="refresh()"  />
     </div>
   </section>
   <section v-else>
@@ -46,7 +46,9 @@ import { useFetchTransactions } from '~/composables/useFetchTransactions';
 import { useSelectedTimePeriod } from '~/composables/useSelectedTimePeriod';
 import { transactionViewOptions } from '~/constants/transaction';
 
-const selectedView = ref(transactionViewOptions[1])
+const user = useSupabaseUser()
+const selectedView = ref(user.value?.user_metadata?.transaction_view ?? transactionViewOptions[1])
+
 const isOpen = ref(false)
 const { current, previous } = useSelectedTimePeriod(selectedView)
 
