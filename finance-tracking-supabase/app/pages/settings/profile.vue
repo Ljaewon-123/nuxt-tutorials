@@ -10,6 +10,18 @@
     </UFormGroup>
 
     <UButton type="submit" color="black" variant="solid" label="Save" :loading="pending" :disabled="pending" />
+
+    <div>
+      <p>Exception</p>
+      <h1>This User</h1>
+      <div>
+        {{ checkUser }}
+      </div>
+      <!-- <h1>This supapbase</h1>
+      <div>
+        {{ checkSupabase }}
+      </div> -->
+    </div>
   </UForm>
 </template>
 
@@ -27,6 +39,9 @@ const state = ref({
   email: user.value?.email
 })
 
+const checkUser = computed(() => user)
+const checkSupabase = computed(() => supabase)
+
 const schema = z.object({
   name: z.string().min(2).optional(),
   email: z.string().email()
@@ -35,9 +50,11 @@ const schema = z.object({
 const saveProfile = async () => {
   pending.value = true
 
+  // 인증만 제대로 만들어도 재밌겠다. 
+
   try {
     const data = {
-      data: {
+      data: { // user metadata에 추가하는건데 문서에는 이런말이 없는거 같은데....??? 아 있네 ㅋㅋㅋ
         full_name: state.value.name
       }
     } as any
