@@ -16,6 +16,7 @@
     "@vue-email/components": "^0.0.21",
     "@vue-email/html": "^0.0.3",
     "@vue-email/render": "^0.0.9",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.16.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.3",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@primevue/nuxt-module": "^4.3.3",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.17",
     "nuxt-auth-utils": "^0.5.17",
     "nuxt-mail": "^5.1.1"

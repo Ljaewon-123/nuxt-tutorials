@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     ], 
   ],
   runtimeConfig:{
+    jwtSecret: process.env.JWT_SECRET,
     public: {
       mail: {
         to: process.env.MAIL_USER

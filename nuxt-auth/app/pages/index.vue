@@ -15,12 +15,23 @@ async function logout() {
 const config = useRuntimeConfig()
 const mail = useMail()
 
+interface Res {
+  success: boolean 
+  token: string
+}
+
 const sendEmail = async() => {
+  const { token } = await $fetch<Res>('/api/auth/generate-magic-link',{
+    method: 'POST',
+    body: {
+      email: config.public.mail.to
+    }
+  })
   mail.send({
     to: config.public.mail.to,
     from: config.public.mail.to,
     subject: 'Testing Nest MailerModule ✔', // Subject line
-    html: await render(resolveComponent('Email') as any)
+    html: await render(h(resolveComponent('Email'), { token }))
   })
 }
 
