@@ -17,7 +17,10 @@ export default defineEventHandler(async (event) => {
     await setUserSession(event, {
       user: {
         name: '<USER_NAME>'
-      }
+      },
+      secure: {
+        apiToken: '1234567890test'
+      },
     })
   } catch (error) {
     console.error(error)
