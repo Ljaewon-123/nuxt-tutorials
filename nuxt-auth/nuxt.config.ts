@@ -28,6 +28,12 @@ export default defineNuxtConfig({
   ],
   runtimeConfig:{
     jwtSecret: process.env.JWT_SECRET,
+    oauth: {
+      github: {
+        clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+      }
+    },
     public: {
       mail: {
         to: process.env.MAIL_USER

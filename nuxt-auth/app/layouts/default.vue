@@ -82,7 +82,13 @@ const items = ref([
                 icon: 'pi pi-search',
                 shortcut: '⌘+S',
                 to: 'magic-url'
-            }
+            },
+            {
+                label: 'OAuth_GITHUB',
+                icon: 'pi pi-search',
+                shortcut: '⌘+S',
+                to: 'oauth'
+            },
         ]
     },
     {
