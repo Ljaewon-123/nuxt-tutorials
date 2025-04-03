@@ -17,14 +17,19 @@ const route = useRoute()
 const token = computed(() => route.query.token as string | undefined)
 
 const veridateLink = async() => {
-  await $fetch(`/api/auth/verify-magic-link/${token.value}`)
+  try{
+    await $fetch(`/api/auth/verify-magic-link/${token.value}`)
+  }
+  catch (e) {
+    navigateTo('/login')
+  }
 }
 
-watchEffect(() => {
+watchEffect(async () => {
   if (token.value) {
     console.log('Magic link token:', token.value)
 
-    veridateLink()
+    await veridateLink()
 
     navigateTo('/')
   }
