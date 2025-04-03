@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 
 export default defineEventHandler(async (event) => {
-  const token = getRouterParam(event, 'hash')
+  const token = getQuery(event).token
+
   if (!token) {
     return { success: false, message: '토큰이 제공되지 않았습니다.' }
   }
@@ -22,12 +23,13 @@ export default defineEventHandler(async (event) => {
         apiToken: '1234567890test'
       },
     })
+
+    sendRedirect(event, '/', 302)
   } catch (error) {
     console.error(error)
-    throw createError({
-      statusCode: 401,
-      message: 'logined failed'
-    })
+    sendRedirect(event, '/login')
+  } finally {
+    await storage.removeItem(magicToken as string)
   }
 
   return { success: true, message: '인증이 완료되었습니다.' }

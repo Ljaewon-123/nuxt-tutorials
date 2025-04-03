@@ -13,6 +13,6 @@ export default defineOAuthGitHubEventHandler({
   // Optional, will return a json error and 401 status code by default
   onError(event, error) {
     console.error('GitHub OAuth error:', error)
-    return sendRedirect(event, '/')
+    return sendRedirect(event, '/') // 어차피 막히긴 할건데
   },
 })
