@@ -1,16 +1,8 @@
-import jwt from 'jsonwebtoken'
 
+// 그.... 이름이 뭐더라 아무튼 직접선언으로 하는게 더 좋을거같음
 export default defineNuxtRouteMiddleware((to, from) => {
-  const authToken = useCookie('authToken').value
+  const authToken = to.query.token
   if (!authToken) {
-    return navigateTo('/login')
-  }
-
-  const config = useRuntimeConfig()
-
-  try {
-    jwt.verify(authToken, config.jwtSecret)
-  } catch (error) {
     return navigateTo('/login')
   }
 })

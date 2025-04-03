@@ -16,9 +16,17 @@ definePageMeta({
 const route = useRoute()
 const token = computed(() => route.query.token as string | undefined)
 
+const veridateLink = async() => {
+  await $fetch(`/api/auth/verify-magic-link/${token.value}`)
+}
+
 watchEffect(() => {
   if (token.value) {
     console.log('Magic link token:', token.value)
+
+    veridateLink()
+
+    navigateTo('/')
   }
 })
 </script>

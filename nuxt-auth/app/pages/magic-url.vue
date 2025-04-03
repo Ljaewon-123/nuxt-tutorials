@@ -14,7 +14,31 @@
 
 <script setup lang="ts">
 import { zodResolver } from '@primevue/forms/resolvers/zod';
+import { render } from '@vue-email/render';
 import { z } from 'zod';
+
+interface Res {
+  success: boolean 
+  token: string
+}
+
+const config = useRuntimeConfig()
+const mail = useMail()
+
+const sendEmail = async() => {
+  const { token } = await $fetch<Res>('/api/auth/generate-magic-link',{
+    method: 'POST',
+    body: {
+      email: config.public.mail.to
+    }
+  })
+  mail.send({
+    to: config.public.mail.to,
+    from: config.public.mail.to,
+    subject: 'Testing Nest MailerModule ✔', // Subject line
+    html: await render(h(resolveComponent('Email'), { token }))
+  })
+}
 
 const toast = useToast();
 
@@ -41,7 +65,7 @@ const onFormSubmit = async(e: any) => {
   }
 
   try {
-
+    sendEmail()
   } catch (error) {
     console.error(error)
   }
