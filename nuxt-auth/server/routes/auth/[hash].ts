@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       },
       secure: {
         apiToken: '1234567890test'
-      },
+      }
     })
 
     sendRedirect(event, '/', 302)
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     console.error(error)
     sendRedirect(event, '/login')
   } finally {
-    await storage.removeItem(magicToken as string)
+    await storage.removeItem(token as string)
   }
 
   return { success: true, message: '인증이 완료되었습니다.' }
