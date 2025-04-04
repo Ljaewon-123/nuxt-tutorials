@@ -85,9 +85,15 @@ const items = ref([
             },
             {
                 label: 'OAuth_GITHUB',
-                icon: 'pi pi-user',
+                icon: 'pi pi-github',
                 shortcut: '⌘+S',
-                to: 'oauth'
+                to: 'github'
+            },
+            {
+                label: 'OAuth_GOOGLE',
+                icon: 'pi pi-google',
+                shortcut: '⌘+S',
+                to: 'google'
             },
         ]
     },
