@@ -1,4 +1,10 @@
 export default defineOAuthGoogleEventHandler({
+  // config: {
+  //   scope: ['openid', 'email', 'profile', 'https://www.googleapis.com/auth/youtube'],
+  //   authorizationParams: {
+  //     access_type: 'offline',
+  //   }
+  // },
   async onSuccess(event, { user, tokens }) {
 
     // Optionally : find if the user with this email already exists in your database
@@ -15,6 +21,6 @@ export default defineOAuthGoogleEventHandler({
     return sendRedirect(event, '/')
   },
   onError(event, error) {
-    return sendRedirect(event, '/')
+    return sendRedirect(event, '/login')
   },
 })
