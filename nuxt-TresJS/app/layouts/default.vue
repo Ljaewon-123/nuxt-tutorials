@@ -111,7 +111,7 @@ const items = ref([
                 label: 'TresJS',
                 icon: 'pi pi-pound',
                 shortcut: '⌘+S',
-                to: 'tres-js'
+                to: 'tres/tres-js'
             },
         ]
     },
