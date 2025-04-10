@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
     'nuxt-auth-utils',
+    '@vueuse/nuxt',
     ['nuxt-mail', 
       {
         message:{
@@ -24,7 +25,8 @@ export default defineNuxtConfig({
           }
         },
       },
-    ], 
+    ],
+    '@nuxtjs/color-mode',
   ],
   runtimeConfig:{
     jwtSecret: process.env.JWT_SECRET,
@@ -43,11 +45,15 @@ export default defineNuxtConfig({
   primevue: {
     options: {
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark-mode',
+        }
       }
     }
   },
   css:[
-    '~/styles/styles.css'
+    '~/assets/styles/styles.css',
+    '~/assets/styles/tailwind.css',
   ],
 })
