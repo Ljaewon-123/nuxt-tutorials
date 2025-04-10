@@ -53,7 +53,6 @@
     <Button icon="pi pi-arrow-right" @click="visible = true" />
     <Button label="Toggle Dark Mode" @click="toggleMode('dark')" />
     <Button label="Toggle Light Mode" @click="toggleMode('light')" />
-    <ThemeSelector></ThemeSelector>
     <slot></slot>
   </div>
 </template>
