@@ -51,11 +51,24 @@
       </template>
     </Drawer>
     <Button icon="pi pi-arrow-right" @click="visible = true" />
+    <Button label="Toggle Dark Mode" @click="toggleMode('dark')" />
+    <Button label="Toggle Light Mode" @click="toggleMode('light')" />
+    <ThemeSelector></ThemeSelector>
     <slot></slot>
   </div>
 </template>
 
 <script setup lang="ts">
+const colorMode = useColorMode()
+type ColorMode = "system" | "light" | "dark"
+const modes: ColorMode[] = [
+  'system', // 0
+  'light', // 1
+  'dark' // 2
+] 
+
+const toggleMode = (mode: ColorMode) => colorMode.preference = mode
+
 const visible = useState(() => false)
 
 const items = ref([

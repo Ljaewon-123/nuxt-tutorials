@@ -26,6 +26,7 @@ export default defineNuxtConfig({
         },
       },
     ],
+    '@nuxtjs/color-mode',
   ],
   runtimeConfig:{
     jwtSecret: process.env.JWT_SECRET,
@@ -44,7 +45,10 @@ export default defineNuxtConfig({
   primevue: {
     options: {
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark-mode',
+        }
       }
     }
   },
