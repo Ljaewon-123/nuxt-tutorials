@@ -1,13 +1,38 @@
 <template>
-  <UiWavyBackground class="mx-auto max-w-4xl pb-40">
-    <p class="inter-var text-center text-2xl font-bold text-white lg:text-7xl md:text-4xl">
-      Hero waves are cool
-    </p>
-    <p class="inter-var mt-4 text-center text-base font-normal text-white md:text-lg">
-      Leverage the power of canvas to create a beautiful hero section
-    </p>
-  </UiWavyBackground>
+  <AuroraBackground>
+    <Motion
+      as="div"
+      :initial="{ opacity: 0, y: 40, filter: 'blur(10px)' }"
+      :in-view="{
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+      }"
+      :transition="{
+        delay: 0.3,
+        duration: 0.8,
+        ease: 'easeInOut',
+      }"
+      class="relative flex flex-col items-center justify-center gap-4 px-4"
+    >
+      <div class="text-center text-3xl font-bold md:text-7xl dark:text-white">
+        Background lights are cool you know.
+      </div>
+      <div class="py-4 text-base font-extralight md:text-4xl dark:text-neutral-200">
+        And this, is chemical burn.
+      </div>
+      <button
+        class="w-fit rounded-full bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
+      >
+        Burn it now
+      </button>
+    </Motion>
+  </AuroraBackground>
 </template>
+
+<script setup lang="ts">
+import { Motion } from "motion-v";
+</script>
 
 <script setup lang="ts">
 definePageMeta({
