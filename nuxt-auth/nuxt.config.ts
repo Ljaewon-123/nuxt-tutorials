@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
     'nuxt-auth-utils',
+    '@vueuse/nuxt',
     ['nuxt-mail', 
       {
         message:{
@@ -24,7 +25,7 @@ export default defineNuxtConfig({
           }
         },
       },
-    ], 
+    ],
   ],
   runtimeConfig:{
     jwtSecret: process.env.JWT_SECRET,
@@ -48,6 +49,7 @@ export default defineNuxtConfig({
     }
   },
   css:[
-    '~/styles/styles.css'
+    '~/assets/styles/styles.css',
+    '~/assets/styles/tailwind.css',
   ],
 })
