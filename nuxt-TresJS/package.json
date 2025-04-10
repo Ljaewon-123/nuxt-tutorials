@@ -1,0 +1,50 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/image": "^1.10.0",
+    "@primeuix/themes": "^1.0.0",
+    "@primevue/forms": "^4.3.3",
+    "@tresjs/core": "^4.3.3",
+    "@tresjs/nuxt": "^3.0.8",
+    "@vue-email/components": "^0.0.21",
+    "@vue-email/html": "^0.0.3",
+    "@vue-email/render": "^0.0.9",
+    "@vueuse/core": "^13.1.0",
+    "@vueuse/nuxt": "^13.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-vue-next": "^0.487.0",
+    "motion-v": "^1.0.0-beta.1",
+    "nuxt": "^3.16.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.3.3",
+    "simplex-noise": "^4.0.3",
+    "tailwindcss-primeui": "^0.6.1",
+    "three": "^0.175.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@inspira-ui/plugins": "^0.0.1",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.13.2",
+    "@primevue/nuxt-module": "^4.3.3",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.17",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "nuxt-auth-utils": "^0.5.17",
+    "nuxt-mail": "^5.1.1",
+    "tailwind-merge": "^3.2.0",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}
