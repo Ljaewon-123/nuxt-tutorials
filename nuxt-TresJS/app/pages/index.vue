@@ -35,6 +35,11 @@ const sendEmail = async() => {
   })
 }
 
+const test = async() => {
+  const hi = await $fetch('/api/test')
+  console.log(hi)
+}
+
 </script>
 
 <template>
@@ -42,5 +47,7 @@ const sendEmail = async() => {
     <h1>Welcome {{ user?.name }}</h1>
     <button @click="logout">Logout</button>
     <Button @click="sendEmail" label="Send Email" variant="text" raised />
+
+    <Button @click="test" label="Test Auth Btn" variant="text" raised />
   </div>
 </template>

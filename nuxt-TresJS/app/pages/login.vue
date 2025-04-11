@@ -16,6 +16,13 @@ async function login() {
   })
   .catch(() => alert('Bad credentials'))
 }
+
+
+const test = async() => {
+  const hi = await $fetch('/api/test')
+  console.log(hi)
+}
+
 </script>
 
 <template>
@@ -23,5 +30,7 @@ async function login() {
     <input v-model="credentials.email" type="email" placeholder="Email" />
     <input v-model="credentials.password" type="password" placeholder="Password" />
     <button type="submit">Login</button>
+    
   </form>
+  <Button @click="test" label="Test Auth Btn" variant="text" raised />
 </template>

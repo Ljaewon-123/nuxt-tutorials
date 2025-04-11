@@ -87,25 +87,25 @@ const items = ref([
                 label: 'Users',
                 icon: 'pi pi-search',
                 shortcut: '⌘+S',
-                to: 'users'
+                to: '/users'
             },
             {
                 label: 'Magic-URL',
                 icon: 'pi pi-search',
                 shortcut: '⌘+S',
-                to: 'magic-url'
+                to: '/magic-url'
             },
             {
                 label: 'OAuth_GITHUB',
                 icon: 'pi pi-github',
                 shortcut: '⌘+S',
-                to: 'github'
+                to: '/github'
             },
             {
                 label: 'OAuth_GOOGLE',
                 icon: 'pi pi-google',
                 shortcut: '⌘+S',
-                to: 'google'
+                to: '/google'
             },
             {
                 label: 'TresJS',
