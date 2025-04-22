@@ -9,5 +9,13 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/icon'
-  ]
+  ],
+  runtimeConfig: {
+    public: {
+      auth: {
+        redirectUserTo: '/user',
+        redirectGuestTo: '/',
+      },
+    },
+  },
 })
