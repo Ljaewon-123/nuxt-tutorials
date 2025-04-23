@@ -1,8 +1,8 @@
 <template>
   <div>
+    <p>Sign Up / Sign In</p>
     <UButton @click="signUp">SignUp</UButton>
     <UButton @click="signIn">SignIn</UButton>
-    <UDivider label="or" />
     <UButton
       icon="i-simple-icons-github"
       type="button"
@@ -93,5 +93,7 @@ async function signout() {
     },
   });
 }
+
+
 
 </script>

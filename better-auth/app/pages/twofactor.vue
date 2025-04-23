@@ -11,6 +11,6 @@ const auth = authClient
 
 
 const { data } = await auth.twoFactor.enable({
-  password: "12341234", // user password required
+  password: "password", // user password required
 });
 </script>
