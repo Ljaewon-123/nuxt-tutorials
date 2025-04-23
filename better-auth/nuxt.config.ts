@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon'
   ],
+  css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
       auth: {

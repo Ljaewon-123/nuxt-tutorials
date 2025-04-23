@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { twoFactor } from "better-auth/plugins"
 import pkg from 'pg'
 
 const { Pool } = pkg
@@ -22,7 +23,26 @@ export const auth = betterAuth({
       clientId: process.env.GITHUB_CLIENT_ID as string, 
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string, 
     }, 
-  }, 
+  },
+  appName: 'better-auth-app',
+  plugins: [
+    twoFactor()
+  ],
+  // secondaryStorage: {
+	// 	get: async (key) => {
+	// 		const value = await redis.get(key);
+	// 		return value ? value : null;
+	// 	},
+	// 	set: async (key, value, ttl) => {
+	// 		if (ttl) await redis.set(key, value, { EX: ttl });
+	// 		// or for ioredis:
+	// 		// if (ttl) await redis.set(key, value, 'EX', ttl)
+	// 		else await redis.set(key, value);
+	// 	},
+	// 	delete: async (key) => {
+	// 		await redis.del(key);
+	// 	}
+	// }
 })
 
 
