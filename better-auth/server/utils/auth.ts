@@ -33,6 +33,7 @@ export const auth = betterAuth({
       sendMagicLink: async ({ email, token, url }, request) => {
         const { sendMail } = useNodeMailer()
         const { html } = mjml2html(getMagicLinkEmail(url))
+        // origin => to: email
         return sendMail({ subject: 'Nuxt + nodemailer', html: html, to: process.env.MAIL_USER })
       }
     })

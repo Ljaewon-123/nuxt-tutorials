@@ -24,6 +24,7 @@
     "kysely": "^0.28.1",
     "mjml": "^4.15.3",
     "nuxt": "^3.16.2",
+    "opossum": "^8.4.0",
     "pg": "^8.14.1",
     "typescript": "^5.8.3",
     "vue": "^3.5.13",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@types/mjml": "^4.7.4",
+    "@types/opossum": "^8.1.8",
     "@types/pg": "^8.11.13",
     "nodemailer": "^6.10.1",
     "nuxt-nodemailer": "^1.1.2"
