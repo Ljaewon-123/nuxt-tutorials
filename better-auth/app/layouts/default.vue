@@ -4,7 +4,7 @@
       <ul class="flex gap-4">
         <li><ULink to="/">Home</ULink></li>
         <li><ULink to="/sign-up-in">Sign Up / Sign In</ULink></li>
-        <li><ULink to="/twofactor">2FA</ULink></li>
+        <li><ULink to="/circuit-breaker">Circuit Breaker</ULink></li>
       </ul>
     </nav>
     <main>
