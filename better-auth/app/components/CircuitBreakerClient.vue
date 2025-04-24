@@ -22,9 +22,8 @@ const callApi = async () => {
   loading.value = true
   result.value = ''
 
-  const breaker = $breaker('hello-api', () => $fetch('/api/circuit/hello'))
+  const breaker = $breaker('hello-api', async() => await $fetch('/api/circuit/hello'))
   status.value = breaker
-  const hi = $fetch('/api/circuit/hello')
 
   breaker.fallback(() => ({ message: 'Fallback: API unavailable' }))
 
