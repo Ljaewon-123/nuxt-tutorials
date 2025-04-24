@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { twoFactor } from "better-auth/plugins"
+import { magicLink, twoFactor } from "better-auth/plugins"
 import pkg from 'pg'
 
 const { Pool } = pkg
@@ -26,7 +26,14 @@ export const auth = betterAuth({
   },
   appName: 'better-auth-app',
   plugins: [
-    twoFactor()
+    // twoFactor()
+    magicLink({
+      sendMagicLink: async ({ email, token, url }, request) => {
+        const { sendMail } = useNodeMailer()
+
+        return sendMail({ subject: 'Nuxt + nodemailer', text: 'Hello from nuxt-nodemailer!', to: 'email@.com' })
+      }
+    })
   ],
   // secondaryStorage: {
 	// 	get: async (key) => {

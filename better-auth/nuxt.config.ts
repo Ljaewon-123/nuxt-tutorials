@@ -8,8 +8,19 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/eslint',
     '@nuxt/fonts',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    'nuxt-nodemailer'
   ],
+  nodemailer: {
+    host: process.env.MAIL_HOST, //'smtp.ethereal.email',
+    port: Number(process.env.MAIL_PORT), //587,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
+    },
+    from: process.env.MAIL_USER,
+    secure: true,
+  },
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {

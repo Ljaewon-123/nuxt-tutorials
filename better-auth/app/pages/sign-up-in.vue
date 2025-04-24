@@ -20,6 +20,15 @@
     >
       Sign Out
     </UButton>
+    <UButton 
+      @click="sendMagicLink" 
+      icon="i-heroicons-outline-mail"
+      type="button"
+      color="neutral"
+      class="ml-2"
+    >
+      Send Magic Link
+    </UButton>
   </div>
 </template>
 
@@ -94,6 +103,27 @@ async function signout() {
   });
 }
 
+async function sendMagicLink() {
+  if (loading.value) return
+  loading.value = true
+  const { error } = await auth.signIn.magicLink({
+    email: email.value,
+    callbackURL: "/"
+  })
+  if (error) {
+    console.error(error)
+    toast.add({
+      title: error.message,
+      color: 'primary',
+    })
+  }
+  else {
+    toast.add({
+      title: `Magic link sent!`,
+    })
+  }
+  loading.value = false
+}
 
 
 </script>
