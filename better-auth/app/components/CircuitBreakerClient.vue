@@ -2,8 +2,11 @@
   <UCard>
     <div class="space-y-4">
       <UButton @click="callApi" :loading="loading">API 요청</UButton>
-      <div class="text-gray-700">
+      <div class="text-white-700">
         {{ result }}
+      </div>
+      <div>
+        {{ status }}
       </div>
     </div>
   </UCard>
@@ -13,12 +16,14 @@
 const { $breaker } = useNuxtApp()
 const result = ref('')
 const loading = ref(false)
+const status = ref()
 
 const callApi = async () => {
   loading.value = true
   result.value = ''
 
-  const breaker = $breaker('hello-api', () => $fetch('/api/hello'))
+  const breaker = $breaker('hello-api', () => $fetch('/api/circuit/hello'))
+  status.value = breaker
 
   breaker.fallback(() => ({ message: 'Fallback: API unavailable' }))
 
@@ -32,3 +37,6 @@ const callApi = async () => {
   }
 }
 </script>
+
+
+<!-- https://nodeshift.dev/opossum/#circuitbreaker -->
