@@ -1,6 +1,8 @@
 import { betterAuth } from "better-auth";
 import { magicLink, twoFactor } from "better-auth/plugins"
 import pkg from 'pg'
+import { getMagicLinkEmail } from "../templates/email";
+import mjml2html from 'mjml'
 
 const { Pool } = pkg
 // const dialect = new LibsqlDialect({
@@ -30,8 +32,8 @@ export const auth = betterAuth({
     magicLink({
       sendMagicLink: async ({ email, token, url }, request) => {
         const { sendMail } = useNodeMailer()
-
-        return sendMail({ subject: 'Nuxt + nodemailer', text: 'Hello from nuxt-nodemailer!', to: 'email@.com' })
+        const { html } = mjml2html(getMagicLinkEmail(url))
+        return sendMail({ subject: 'Nuxt + nodemailer', html: html, to: process.env.MAIL_USER })
       }
     })
   ],
