@@ -9,6 +9,7 @@ const { data: sessionAsync } = await authClient.useSession(useFetch);
 <template>
     <UCard>
         {{ session }}
+        {{ typeof session }}
     </UCard>
     <br>
     <UCard>
