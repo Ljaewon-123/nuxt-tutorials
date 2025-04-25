@@ -35,7 +35,7 @@
 <script setup lang="ts">
 
 // const auth = authClient
-const { authClient: auth } = useAuth()
+const { authClient: auth, fetchSession } = useAuth()
 
 const toast = useToast()
 const loading = ref(false)
@@ -103,6 +103,7 @@ async function signout() {
     toast.add({
       title: `You have been signed out!`,
     })
+    await fetchSession()
     await navigateTo('/')
   }
   loading.value = false

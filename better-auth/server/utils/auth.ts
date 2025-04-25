@@ -51,25 +51,26 @@ export const auth = betterAuth({
   ],
   // 커스텀으로 kvstorage와 연결가능 
   // 이기능이 정의되지 않으면 연결된 databse에 저장함 세션을
-  // secondaryStorage: {
-	// 	get: async (key) => {
-	// 		const value = await storage.get(key) as string;
-	// 		return value ? value : null;
-	// 	},
-	// 	set: async (key, value, ttl) => {
-  //     // get이 object로 return됨 약간 의문임... string를 충족하는데 왜 에러?
-  //     // redis사용이 불가능하고 유저가 많지않다면 ttl때문에 DB에 넣는걸 권장함
-  //     if (ttl) await storage.set(key, JSON.stringify(value));
-  //     // if (ttl) await redis.set(key, value, { EX: ttl });
-  //     // or for ioredis:
-  //     // if (ttl) await redis.set(key, value, 'EX', ttl)
-  //     else await storage.set(key, value);
-	// 	},
-	// 	delete: async (key) => {
-	// 		await storage.del(key);
-	// 	}
-	// }
+  secondaryStorage: {
+		get: async (key) => {
+			const value = await storage.get(key) as string;
+			return value ? value : null;
+		},
+		set: async (key, value, ttl) => {
+      // get이 object로 return됨 약간 의문임... string를 충족하는데 왜 에러?
+      // redis사용이 불가능하고 유저가 많지않다면 ttl때문에 DB에 넣는걸 권장함
+      if (ttl) await storage.set(key, JSON.stringify(value));
+      // if (ttl) await redis.set(key, value, { EX: ttl });
+      // or for ioredis:
+      // if (ttl) await redis.set(key, value, 'EX', ttl)
+      else await storage.set(key, value);
+		},
+		delete: async (key) => {
+			await storage.del(key);
+		}
+	}
 })
 
 
 //  npx @better-auth/cli generate --config server/utils/auth.ts
+// [{"token":"L2qBvLf0yw65uJ9etH39bNF1YpYgElBE","expiresAt":1746171496631}]
