@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { magicLink, twoFactor } from "better-auth/plugins"
+import { admin, magicLink, twoFactor } from "better-auth/plugins"
 import pkg from 'pg'
 import { getMagicLinkEmail } from "../templates/email";
 import mjml2html from 'mjml'
@@ -44,7 +44,8 @@ export const auth = betterAuth({
         // origin => to: email
         return sendMail({ subject: 'Nuxt + nodemailer', html: html, to: process.env.MAIL_USER })
       }
-    })
+    }),
+    admin()
   ],
   // 커스텀으로 kvstorage와 연결가능 
   // 이기능이 정의되지 않으면 연결된 databse에 저장함 세션을
