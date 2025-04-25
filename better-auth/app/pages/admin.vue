@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const auth = authClient
+// const auth = authClient
+const { authClient } = useAuth()
 const toast = useToast()
 
 const createUser = async () => {

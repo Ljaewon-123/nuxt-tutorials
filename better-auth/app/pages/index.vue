@@ -1,4 +1,12 @@
 <script setup lang="ts">
+// 하이드레이트시 meta 즉 초기설정 
+definePageMeta({
+  middleware: 'auth'
+  // auth: {
+  //   requiresAuth: true,
+  // }
+})
+const { authClient } = useAuth()
 const session = authClient.useSession()
 // console.log(session) // hydrate error
 

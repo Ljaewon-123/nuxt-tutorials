@@ -34,7 +34,8 @@
 
 <script setup lang="ts">
 
-const auth = authClient
+// const auth = authClient
+const { authClient: auth } = useAuth()
 
 const toast = useToast()
 const loading = ref(false)
