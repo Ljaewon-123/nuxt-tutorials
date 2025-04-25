@@ -25,29 +25,51 @@ export function useAuth() {
   const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
 
   // 부작용 조심 해야함 
-  const fetchSession = async () => {
-    const { data } = await authClient.useSession(useFetch)
+  // const fetchSession = async () => {
+  //   const { data } = await authClient.useSession(useFetch)
     
-    // const { data } = await authClient.getSession({
-    //   fetchOptions: {
-    //     headers,
-    //   },
-    // })
+  //   // const { data } = await authClient.getSession({
+  //   //   fetchOptions: {
+  //   //     headers,
+  //   //   },
+  //   // })
 
-    session.value = data.value?.session || null
-    user.value = data.value?.user || null
+  //   session.value = data.value?.session || null
+  //   user.value = data.value?.user || null
 
-    return data;
+  //   return data;
+  // }
+
+  const fetchSession = async () => {
+    const { data } = await authClient.getSession({
+      fetchOptions: {
+        headers,
+      },
+    })
+    session.value = data?.session || null
+    user.value = data?.user || null
+    console.log('session.value', session.value, data?.session)
+    return data
   }
 
   // 부작용 매우 조심해야하고 아니면 loggedIn같은 상태 넘기는걸 포기해야함
-  fetchSession()
+  // %%%%%%%% 이미 라우터 인증을 위한 미들웨어를 사용하는 페이지면 이미 2번 페칭하기때문에 다른방법 고려 
+  // fetchSession()
+
+  // 모든 기기 세션 때문에 이거 안되는거 같음 
+  if (import.meta.client) {
+    authClient.$store.listen('$sessionSignal', async (signal) => {
+      if (!signal) return
+      await fetchSession()
+    })
+  }
 
   return { 
     authClient,
     loggedIn: computed(() => !!session.value),
     session,
-    user
+    user,
+    fetchSession
   }
 }
 
