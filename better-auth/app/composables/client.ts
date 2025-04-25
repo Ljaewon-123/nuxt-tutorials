@@ -5,6 +5,7 @@ import type {
   InferUserFromClient,
   ClientOptions,
 } from 'better-auth/client'
+import type { UserAuth } from "./types/user.interface"
 
 export function useAuth() {
   const url = useRequestURL()
@@ -22,7 +23,7 @@ export function useAuth() {
   })
 
   const session = useState<InferSessionFromClient<ClientOptions> | null>('auth:session', () => null)
-  const user = useState<InferUserFromClient<ClientOptions> | null>('auth:user', () => null)
+  const user = useState<UserAuth | null>('auth:user', () => null)
 
   // 부작용 조심 해야함 
   const fetchSession = async () => {
@@ -37,7 +38,7 @@ export function useAuth() {
   // 부작용 매우 조심해야하고 아니면 loggedIn같은 상태 넘기는걸 포기해야함
   // %%%%%%%% 이미 라우터 인증을 위한 미들웨어를 사용하는 페이지면 이미 2번 페칭하기때문에 다른방법 고려 
   // 로그 아웃까지는 여기에 포함하는거 생각 해보자
-  console.log('useAuth', session.value)
+  // console.log('useAuth', session.value)
   if(session.value === null) {
     fetchSession()
   }

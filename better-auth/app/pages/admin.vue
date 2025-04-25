@@ -1,4 +1,11 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'role',
+  auth: {
+    requiresAuth: true,
+    roles: ['admin'],
+  }
+})
 // const auth = authClient
 const { authClient } = useAuth()
 const toast = useToast()
