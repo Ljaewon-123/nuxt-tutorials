@@ -45,7 +45,9 @@ export const auth = betterAuth({
         return sendMail({ subject: 'Nuxt + nodemailer', html: html, to: process.env.MAIL_USER })
       }
     }),
-    admin()
+    admin({
+      adminUserIds: ["hqF6M1KPNKamzOeswvN9f9bsJXrziMBl"]
+    })
   ],
   // 커스텀으로 kvstorage와 연결가능 
   // 이기능이 정의되지 않으면 연결된 databse에 저장함 세션을
