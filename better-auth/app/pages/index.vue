@@ -8,6 +8,8 @@ definePageMeta({
 })
 const { authClient } = useAuth()
 const session = authClient.useSession()
+
+const getsession = await authClient.getSession()
 // console.log(session) // hydrate error
 
 const { data: sessionAsync } = await authClient.useSession(useFetch);
@@ -29,6 +31,12 @@ const callApi = async () => {
     <UCard>
         {{ session }}
         {{ typeof session }}
+    </UCard>
+    <br>
+    <UCard>
+        <p>Get Session</p>
+        {{ getsession }}
+        {{ typeof getsession }}
     </UCard>
     <br>
     <UCard>

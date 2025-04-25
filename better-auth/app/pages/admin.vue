@@ -79,7 +79,7 @@ const { data, error, execute } = await useLazyAsyncData('admin-list', listUsers)
       <div class="flex justify-end gap-2">
         <UButton @click="createUser()">Create User</UButton>
       </div>
-      <div class="flex justify-end gap-2">
+      <div class="flex justify-end gap-2 my-2">
         <UButton @click="deleteUser()">Delete User</UButton>
       </div>
       <div class="flex justify-end gap-2">
