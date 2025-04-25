@@ -30,6 +30,11 @@ export const auth = betterAuth({
     }, 
   },
   appName: 'better-auth-app',
+  account: {
+    accountLinking: {
+      enabled: true, 
+    }
+  },
   plugins: [
     // twoFactor()
     magicLink({
