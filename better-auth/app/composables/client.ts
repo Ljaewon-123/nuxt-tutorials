@@ -27,12 +27,6 @@ export function useAuth() {
   // 부작용 조심 해야함 
   const fetchSession = async () => {
     const { data } = await authClient.useSession(useFetch)
-    
-    // const { data } = await authClient.getSession({
-    //   fetchOptions: {
-    //     headers,
-    //   },
-    // })
 
     session.value = data.value?.session || null
     user.value = data.value?.user || null
