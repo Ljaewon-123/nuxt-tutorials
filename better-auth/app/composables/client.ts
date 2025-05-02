@@ -45,10 +45,11 @@ export function useAuth() {
 
   return { 
     authClient,
-    loggedIn: computed(() => !!session.value),
+    isLoggedIn: computed(() => !!session.value),
     session,
     user,
-    fetchSession
+    fetchSession,
+    logout:() => authClient.signOut()
   }
 }
 

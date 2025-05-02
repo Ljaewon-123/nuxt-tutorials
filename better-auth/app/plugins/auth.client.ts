@@ -9,3 +9,4 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     })
   }
 })
+// ssr 방식으로 가져오면 미스매치 안나는거 아닌가 
