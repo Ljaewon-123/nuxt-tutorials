@@ -86,6 +86,8 @@ async function signIn() {
       title: `You have been signed in!`,
     })
     await navigateTo('/')
+    await navigateTo('/')
+    await navigateTo('/')
   }
   loading.value = false
 }
