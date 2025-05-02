@@ -85,8 +85,7 @@ async function signIn() {
     toast.add({
       title: `You have been signed in!`,
     })
-    await navigateTo('/')
-    await navigateTo('/')
+    await fetchSession()
     await navigateTo('/')
   }
   loading.value = false
