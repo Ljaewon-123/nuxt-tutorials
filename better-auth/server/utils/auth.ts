@@ -21,7 +21,18 @@ export const auth = betterAuth({
     port: parseInt(process.env.DB_PORT || "5432"),
   }),
   emailAndPassword: {  
-    enabled: true
+    enabled: true,
+    requireEmailVerification: true,
+  },
+  emailVerification: {
+    sendVerificationEmail: async ( { user, url, token }, request) => {
+      const { sendMail } = useNodeMailer()
+      await sendMail({
+        to: process.env.MAIL_USER,
+        subject: "Verify your email address",
+        text: `Click the link to verify your email: ${url}`,
+      });
+    },
   },
   socialProviders: { 
     github: { 
