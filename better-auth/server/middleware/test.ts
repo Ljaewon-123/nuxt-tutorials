@@ -4,5 +4,6 @@ export default defineEventHandler(async (event) => {
     headers: event.headers
   });
 
+  // 로그인 여부로 return하기 위한 마들웨어 세션 체크
   console.log(session)
 })

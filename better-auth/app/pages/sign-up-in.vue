@@ -110,6 +110,7 @@ async function signout() {
   loading.value = false
 }
 
+// 회원가입없이도 가능 -> 자동으로 회원가입 
 async function sendMagicLink() {
   if (loading.value) return
   loading.value = true
@@ -120,7 +121,7 @@ async function sendMagicLink() {
   if (error) {
     console.error(error)
     toast.add({
-      title: error.message,
+      title: error.statusText,
       color: 'primary',
     })
   }

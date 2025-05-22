@@ -19,7 +19,7 @@ export default defineNuxtConfig({
       pass: process.env.MAIL_PASS,
     },
     from: process.env.MAIL_USER,
-    secure: true,
+    // secure: true, // fake 메일로 할때는 꺼야할듯 
   },
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
