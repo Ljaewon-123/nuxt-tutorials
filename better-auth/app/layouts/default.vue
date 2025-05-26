@@ -10,6 +10,7 @@ const { isLoggedIn } = useAuth()
         <li><ULink to="/sign-up-in">Sign Up / Sign In</ULink></li>
         <li><ULink to="/circuit-breaker">Circuit Breaker</ULink></li>
         <li><ULink to="/admin">Admin</ULink></li>
+        <li><ULink to="/some-error">Error</ULink></li>
       </ul>
     </nav>
     <main>
