@@ -45,5 +45,6 @@ function wrapResponse<T>(value: NonNullable<T>): Response<NonNullable<T>> {
   }
 }
 
-
+// null safety 하는건 좋은데 array나 object일때는 별로인거 같은데 
 // defineEventHandler에 getParams, getQuery, getBody 이거 유효성 검사 하는거 있을텐데
+// https://h3.dev/examples/validate-data#validate-params
