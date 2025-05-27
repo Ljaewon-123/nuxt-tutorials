@@ -1,4 +1,5 @@
 import type { EventHandlerRequest, H3Event } from 'h3';
+import { defineEventHandlerWithNullSafety } from './null-safety-handler';
 
 interface User {
   id: number
@@ -7,8 +8,8 @@ interface User {
 
 type EventHandlerWithUser<T extends EventHandlerRequest, D> = (event: H3Event<T>, user: User) => Promise<D>
 
-export function defineEventHandlerWithCheckUser<T extends EventHandlerRequest, D>(permissionStr: string, handler: EventHandlerWithUser<T, D>){
-  return defineEventHandler(async event => {
+export function defineEventHandlerWithCheckUserNull<T extends EventHandlerRequest, D>(permissionStr: string, handler: EventHandlerWithUser<T, D>){
+  return defineEventHandlerWithNullSafety(async event => {
     const user = await getCurrentUser();
     // permission things
     checkPermission(user, permissionStr)
@@ -17,14 +18,9 @@ export function defineEventHandlerWithCheckUser<T extends EventHandlerRequest, D
 }
 
 const checkPermission = (user: User, permission: string) => {
-  const isAllowed = Math.random() > 0.5 ? true: false
-  if(!isAllowed) {
-    throw createError({
-      statusCode: 403,
-      statusMessage: 'Permission Denied',
-      message: 'Permission Denied',
-    })
-  }
+  if(permission == 'user.edit') return 
+  
+  throw forbiddenError('Error: Permission Denied')
 }
 
 const getCurrentUser = async () => {

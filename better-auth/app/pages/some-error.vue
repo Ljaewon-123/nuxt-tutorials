@@ -20,6 +20,7 @@ const callApi = async() => {
   }
 }
 
+// const a = await $fetch('/api/test/safe')
 // 맨날 햇갈리네
 // const callComposableApi = async() => {
 //   await $fetch('/api/test/:createError')

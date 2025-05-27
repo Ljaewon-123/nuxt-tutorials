@@ -17,14 +17,21 @@ export function defineEventHandlerWithCheckUser<T extends EventHandlerRequest, D
 }
 
 const checkPermission = (user: User, permission: string) => {
-  const isAllowed = Math.random() > 0.5 ? true: false
-  if(!isAllowed) {
-    throw createError({
-      statusCode: 403,
-      statusMessage: 'Permission Denied',
-      message: 'Permission Denied',
-    })
-  }
+  if(permission == 'user.edit') return 
+
+  throw createError({
+    statusCode: 403,
+    statusMessage: 'Permission Denied',
+    message: 'Permission Denied',
+  })
+  // const isAllowed = Math.random() > 0.5 ? true: false
+  // if(!isAllowed) {
+  //   throw createError({
+  //     statusCode: 403,
+  //     statusMessage: 'Permission Denied',
+  //     message: 'Permission Denied',
+  //   })
+  // }
 }
 
 const getCurrentUser = async () => {
