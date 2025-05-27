@@ -1,6 +1,9 @@
 import type { EventHandlerRequest, H3Event } from 'h3';
 import { noContentError } from './errors';
 
+// 생각보다 효용성이 없는거 같다. 의도는 나쁘지 않은데 
+// { isSuccess: boolena, message: string, data: T } 이런식으로 사용할때 차라리 더 나을듯 
+
 export function defineEventHandlerWithNullSafety<D, T extends EventHandlerRequest = EventHandlerRequest>(handler: (event: H3Event<T>) => Promise<D> | D) {
   return defineEventHandler(async event => {
     const result = await handler(event)
@@ -10,7 +13,7 @@ export function defineEventHandlerWithNullSafety<D, T extends EventHandlerReques
 
 const validateNullSafety = <T>(value: T): Response<NonNullable<T>> => {
   if(value === null || value === undefined) { // number 0 일때는 피하기 위해 지정
-    throw noContentError('Value cannot be null or undefined');
+    throw noContentError('Value cannot be null or undefined'); // 204는 성공으로 취급한다.
   }
   return wrapResponse(value);
 }
@@ -45,7 +48,6 @@ function wrapResponse<T>(value: NonNullable<T>): Response<NonNullable<T>> {
   }
 }
 
-// null safety 하는건 좋은데 array나 object일때는 별로인거 같은데 
 // 배열이나 object에만 Response를 적용하면 일관성은 없는데 쓰기는 편하겠다. 
 
 
