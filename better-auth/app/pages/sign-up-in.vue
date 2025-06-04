@@ -34,7 +34,8 @@
 
 <script setup lang="ts">
 
-const auth = authClient
+// const auth = authClient
+const { authClient: auth, fetchSession } = useAuth()
 
 const toast = useToast()
 const loading = ref(false)
@@ -84,25 +85,32 @@ async function signIn() {
     toast.add({
       title: `You have been signed in!`,
     })
+    await fetchSession()
     await navigateTo('/')
   }
   loading.value = false
 }
 
 async function signout() {
-  await authClient.signOut({
-    fetchOptions: {
-      onSuccess: async () => {
-        // redirect to login page
-        toast.add({
-          title: `You have been signed out!`,
-        })
-        await navigateTo('/')
-      },
-    },
-  });
+  const { error } = await auth.signOut()
+  if (error) {
+    console.error(error)
+    toast.add({
+      title: error.message,
+      color: 'primary',
+    })
+  }
+  else {
+    toast.add({
+      title: `You have been signed out!`,
+    })
+    await fetchSession()
+    await navigateTo('/')
+  }
+  loading.value = false
 }
 
+// 회원가입없이도 가능 -> 자동으로 회원가입 
 async function sendMagicLink() {
   if (loading.value) return
   loading.value = true
@@ -113,7 +121,7 @@ async function sendMagicLink() {
   if (error) {
     console.error(error)
     toast.add({
-      title: error.message,
+      title: error.statusText,
       color: 'primary',
     })
   }

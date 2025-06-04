@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { magicLink, twoFactor } from "better-auth/plugins"
+import { admin, magicLink, twoFactor } from "better-auth/plugins"
 import pkg from 'pg'
 import { getMagicLinkEmail } from "../templates/email";
 import mjml2html from 'mjml'
@@ -9,6 +9,9 @@ const { Pool } = pkg
 //   url: process.env.BETTER_AUTH_URL || "",
 //   authToken: process.env.BETTER_AUTH_SECRET || "",
 // })
+
+const storage = useStorage('data')
+
 export const auth = betterAuth({
   database: new Pool({
     user: process.env.DB_USER,
@@ -18,7 +21,18 @@ export const auth = betterAuth({
     port: parseInt(process.env.DB_PORT || "5432"),
   }),
   emailAndPassword: {  
-    enabled: true
+    enabled: true,
+    // requireEmailVerification: true,
+  },
+  emailVerification: {
+    sendVerificationEmail: async ( { user, url, token }, request) => {
+      const { sendMail } = useNodeMailer()
+      await sendMail({
+        to: process.env.MAIL_USER,
+        subject: "Verify your email address",
+        text: `Click the link to verify your email: ${url}`,
+      });
+    },
   },
   socialProviders: { 
     github: { 
@@ -27,6 +41,11 @@ export const auth = betterAuth({
     }, 
   },
   appName: 'better-auth-app',
+  account: {
+    accountLinking: {
+      enabled: true, 
+    }
+  },
   plugins: [
     // twoFactor()
     magicLink({
@@ -36,24 +55,33 @@ export const auth = betterAuth({
         // origin => to: email
         return sendMail({ subject: 'Nuxt + nodemailer', html: html, to: process.env.MAIL_USER })
       }
+    }),
+    admin({
+      adminUserIds: ["hqF6M1KPNKamzOeswvN9f9bsJXrziMBl"]
     })
   ],
-  // secondaryStorage: {
-	// 	get: async (key) => {
-	// 		const value = await redis.get(key);
-	// 		return value ? value : null;
-	// 	},
-	// 	set: async (key, value, ttl) => {
-	// 		if (ttl) await redis.set(key, value, { EX: ttl });
-	// 		// or for ioredis:
-	// 		// if (ttl) await redis.set(key, value, 'EX', ttl)
-	// 		else await redis.set(key, value);
-	// 	},
-	// 	delete: async (key) => {
-	// 		await redis.del(key);
-	// 	}
-	// }
+  // 커스텀으로 kvstorage와 연결가능 
+  // 이기능이 정의되지 않으면 연결된 databse에 저장함 세션을
+  secondaryStorage: {
+		get: async (key) => {
+			const value = await storage.get(key) as string;
+			return value ? value : null;
+		},
+		set: async (key, value, ttl) => {
+      // get이 object로 return됨 약간 의문임... string를 충족하는데 왜 에러?
+      // redis사용이 불가능하고 유저가 많지않다면 ttl때문에 DB에 넣는걸 권장함
+      if (ttl) await storage.set(key, JSON.stringify(value));
+      // if (ttl) await redis.set(key, value, { EX: ttl });
+      // or for ioredis:
+      // if (ttl) await redis.set(key, value, 'EX', ttl)
+      else await storage.set(key, value);
+		},
+		delete: async (key) => {
+			await storage.del(key);
+		}
+	}
 })
 
 
 //  npx @better-auth/cli generate --config server/utils/auth.ts
+// [{"token":"L2qBvLf0yw65uJ9etH39bNF1YpYgElBE","expiresAt":1746171496631}]

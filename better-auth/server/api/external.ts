@@ -1,15 +1,16 @@
 export default defineEventHandler(async (event) => {
 
-  const user = event.context.user
-  console.log(user)
+  const session = await auth.api.getSession({
+    headers: event.headers
+  });
+  console.log(session?.user)
 
-  // $fetch('http://localhost:4000/', {
-  //   method: "POST",
-  //   headers: {
-  //     'X-User-Id': user.id,
-  //     'X-User-Role': user.role
-  //   }
-  // })
+  $fetch('http://localhost:4000/', {
+    method: "POST",
+    headers: {
+      'x-user': JSON.stringify(session?.user)
+    }
+  })
   
   return {
     status: 200,
