@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@libsql/kysely-libsql": "^0.4.1",
@@ -19,6 +20,7 @@
     "@vue-email/components": "^0.0.21",
     "@vue-email/html": "^0.0.3",
     "@vue-email/render": "^0.0.9",
+    "autocannon": "^8.0.0",
     "better-auth": "^1.2.7",
     "eslint": "^9.25.1",
     "kysely": "^0.28.1",
@@ -31,6 +33,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@types/autocannon": "^7.12.7",
     "@types/mjml": "^4.7.4",
     "@types/opossum": "^8.1.8",
     "@types/pg": "^8.11.13",

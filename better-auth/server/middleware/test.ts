@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
   // 서버에서 세션 접근
   // 이걸로 막고 context에 서 보낸다고?
-  console.log(session)
+  console.log(session, 'HI i am middleware')
   // if(!session) {
   //   return {
   //     statusCode: 401

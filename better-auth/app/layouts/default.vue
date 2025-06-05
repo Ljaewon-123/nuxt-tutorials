@@ -11,6 +11,7 @@ const { isLoggedIn } = useAuth()
         <li><ULink to="/circuit-breaker">Circuit Breaker</ULink></li>
         <li><ULink to="/admin">Admin</ULink></li>
         <li><ULink to="/some-error">Error</ULink></li>
+        <li><ULink to="/autocannon">Autocannon</ULink></li>
       </ul>
     </nav>
     <main>
