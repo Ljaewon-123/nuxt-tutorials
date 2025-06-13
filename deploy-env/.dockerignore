@@ -1,0 +1,53 @@
+# Node modules (will be reinstalled in container)
+node_modules
+**/node_modules
+
+# Dependency locks (optional, if you rebuild often with changing deps)
+# package-lock.json
+# yarn.lock
+
+# Output builds
+dist
+build
+out
+.nuxt
+coverage
+
+# Logs and temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vscode
+.idea
+.DS_Store
+.env
+.env.*        
+*.local
+*.cache
+*.swp
+.tmp
+temp
+
+# Git
+.git
+.gitignore
+
+# OS/Editor junk
+Thumbs.db
+Desktop.ini
+*.sublime-project
+*.sublime-workspace
+
+# Docker
+Dockerfile*
+.dockerignore
+
+# Tests and docs (optional, depending on your container needs)
+__tests__/
+tests/
+*.spec.*
+*.test.*
+docs/
+.storybook/
