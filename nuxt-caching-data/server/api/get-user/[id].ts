@@ -5,7 +5,10 @@ const User = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-
+  // throw createError({
+  //   message: 'hi',
+  //   statusCode: 400
+  // })
   const params = await getValidatedRouterParams(event, User.parse)
   // const id = getRouterParam(event, 'id')
   
