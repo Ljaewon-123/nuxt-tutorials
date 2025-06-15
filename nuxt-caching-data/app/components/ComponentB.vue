@@ -5,9 +5,10 @@ const fetchUser = async(id: number) => {
 }
 
 // 이제 key도 computed랑 getter가능 
-const { data: users, status, execute } = await useLazyAsyncData('users', () => fetchUser(id.value), {
-  immediate: false
-})
+const { data: users, status, execute } = await useAsyncData('users', () => fetchUser(id.value))
+// const { data: users, status, execute } = await useLazyAsyncData('users', () => fetchUser(id.value), {
+//   immediate: false
+// })
 </script>
 
 <template>

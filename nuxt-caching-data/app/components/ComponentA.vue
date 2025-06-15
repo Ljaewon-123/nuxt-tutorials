@@ -5,15 +5,16 @@ const fetchUser = async(id: number) => {
 }
 
 // 이제 key도 computed랑 getter가능 
-const { data: users, status, execute } = await useLazyAsyncData('users', () => fetchUser(id.value), {
-  immediate: false
-})
+const { data: users, status, execute } = await useAsyncData('users', () => fetchUser(id.value))
+// const { data: users, status, execute } = await useLazyAsyncData('users', () => fetchUser(id.value), {
+//   immediate: false
+// })
 </script>
 
 <template>
   <div>
     <p>Current ID: {{ id }}</p>
-    <button @click="id++,execute()">plus id</button>
+    <button @click="id++, execute()">plus id</button>
     <p>Statue</p>
     {{ status }}
     <p>User</p>

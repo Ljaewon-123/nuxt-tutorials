@@ -1,12 +1,8 @@
 <template>
   <div>
     <p>This layout</p>
-    <div>
-      <!-- <p>Statue</p>
-      {{ status }}
-      <p>User</p>
-      {{ users }} -->
-    </div>
+    <LazyCurrentUesr ref="user" :hydrate-after="20"/>
+    <hr>
     <main>
       <slot/>
     </main>
@@ -14,5 +10,7 @@
 </template>
 
 <script setup lang="ts">
-
+// const user = useTemplateRef('user')
+// 결국은 수화하는 순간에 미스매치 애러 발생한다.
 </script>
+
