@@ -8,16 +8,20 @@ describe('login page', async () => {
   })
 
   it('displays the email and password fields', async () => {
-    const page = await createPage('/index')
-    console.log(page)
+    const page = await createPage('/')
+    console.log(page, 'nothing')
   })
 
   it('ssr:html', async() => {
     const html = await $fetch('/')
+    console.log(html, 'html ssr')
   })
 
   it('ssr:response', async() => {
     const res = await fetch('/')
     const { body, headers } = res
+    console.log(body)
+    console.log('|||||||||||||||||')
+    console.log(headers)
   })
 })
