@@ -20,5 +20,9 @@ const { data: users, status, execute, error } = await useAsyncData('users', () =
     <p>User</p>
     {{ users }}
     {{ parseErrorData(error)?.message }}
+    <p>Inside component</p>
+    <div>
+      <AInside/>
+    </div>
   </div>
 </template>
