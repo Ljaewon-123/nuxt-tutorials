@@ -27,3 +27,6 @@ export default defineEventHandler(async (event) => {
     user
   }
 })
+
+
+// nuxt로깅은 front-end 성능추적용과 어플리케이션이 깨질만한 심각한 요소 혹은 보안위주로 로깅할 방법 찾기 
