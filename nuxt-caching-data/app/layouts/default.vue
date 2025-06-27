@@ -6,6 +6,7 @@
       <NuxtLink to="/">main</NuxtLink>
       <NuxtLink to="sse">sse</NuxtLink>
       <NuxtLink to="new-path-component">new-path-component</NuxtLink>
+      <NuxtLink to="nested-comp">nested components</NuxtLink>
     </nav>
     <hr>
     <main>
