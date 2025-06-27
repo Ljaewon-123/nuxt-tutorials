@@ -2,6 +2,10 @@
   <div>
     <p>This layout</p>
     <LazyCurrentUesr ref="user" :hydrate-after="20"/>
+    <nav>
+      <NuxtLink to="/">main</NuxtLink>
+      <NuxtLink to="sse">sse</NuxtLink>
+    </nav>
     <hr>
     <main>
       <slot/>
