@@ -9,6 +9,10 @@ const { data: users, status, execute, error } = await useAsyncData('users', () =
 // const { data: users, status, execute } = await useLazyAsyncData('users', () => fetchUser(id.value), {
 //   immediate: false
 // })
+
+
+// createError
+// {} "error": true, "url": "http://localhost:3000/api/get-user/10", "statusCode": 400, "statusMessage": "Server Error", "message": "hi", "stack": }
 </script>
 
 <template>
@@ -19,7 +23,8 @@ const { data: users, status, execute, error } = await useAsyncData('users', () =
     {{ status }}
     <p>User</p>
     {{ users }}
-    {{ parseErrorData(error)?.message }}
+    {{ error?.data }}
+    <!-- {{ parseErrorData(error)?.message }} -->
     <p>Inside component</p>
     <div>
       <AInside/>
