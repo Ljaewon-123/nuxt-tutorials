@@ -5,6 +5,7 @@
     <nav>
       <NuxtLink to="/">main</NuxtLink>
       <NuxtLink to="sse">sse</NuxtLink>
+      <NuxtLink to="new-path-component">new-path-component</NuxtLink>
     </nav>
     <hr>
     <main>

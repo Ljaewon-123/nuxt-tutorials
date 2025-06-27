@@ -4,4 +4,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   future: { compatibilityVersion: 4 },
   modules: ['@nuxt/test-utils'],
+  pages: {
+    pattern: ['**/*.vue', '!**/components/**']
+  },
+  components: [
+    '~/components', {
+      path: '~/pages',
+      pattern: '**/components/**',
+      pathPrefix: false
+    }
+  ]
 })
