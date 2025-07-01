@@ -8,11 +8,11 @@ export const useCircuitBreaker = (action: () => Promise<any>, options = {}) => {
     ...options,
   })
 
-  // 컴포넌트가 언마운트될 때 자동 정리
-  onBeforeUnmount(() => {
-    // opossum의 경우 명시적 destroy가 없지만 참조 해제
-    breaker.removeAllListeners()
-  })
+  // // 컴포넌트가 언마운트될 때 자동 정리
+  // onBeforeUnmount(() => {
+  //   // opossum의 경우 명시적 destroy가 없지만 참조 해제
+  //   breaker.removeAllListeners()
+  // })
 
   return {
     fire: () => breaker.fire(),
