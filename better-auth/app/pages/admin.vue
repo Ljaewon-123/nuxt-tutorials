@@ -60,7 +60,25 @@ const listUsers = async () => {
 
 const { data, error, execute } = await useLazyAsyncData('admin-list', listUsers)
 
-
+const updateUser = async () => {
+  const { error } =  await authClient.updateUser({
+    name: 'change name',
+    meta: JSON.stringify({
+      key: 'value',
+      anotherKey: 'anotherValue'
+    }),
+  })
+  if (error) {
+    toast.add({
+      title: "Failed to update user"
+    });
+  } else {
+    toast.add({
+      title: "User update successfully!",
+      description: "The user has been delete successfully."
+    });
+  }
+}
 
 
 </script>
@@ -89,8 +107,11 @@ const { data, error, execute } = await useLazyAsyncData('admin-list', listUsers)
       <div class="flex justify-end gap-2 my-2">
         <UButton @click="deleteUser()">Delete User</UButton>
       </div>
-      <div class="flex justify-end gap-2">
+      <div class="flex justify-end gap-2 my-2">
         <UButton @click="execute()">List User</UButton>
+      </div>
+      <div class="flex justify-end gap-2">
+        <UButton @click="updateUser()">Update User</UButton>
       </div>
     </template>
   </UCard>

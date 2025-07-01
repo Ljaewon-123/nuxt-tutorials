@@ -6,6 +6,7 @@ export default defineEventHandler(async (event) => {
 
   // 서버에서 세션 접근
   // 이걸로 막고 context에 서 보낸다고?
+  // 여기는 추가필드가 있다.
   console.log(session, 'HI i am middleware')
   // if(!session) {
   //   return {

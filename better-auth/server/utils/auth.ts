@@ -34,6 +34,15 @@ export const auth = betterAuth({
       });
     },
   },
+  user: {
+    additionalFields: {
+      meta: {
+        type: "string",         // `jsonb`로 사용
+        required: false,      // null 허용
+        defaultValue: null,   // 명시적으로 null 기본값
+      },
+    }
+  },
   socialProviders: { 
     github: { 
       clientId: process.env.GITHUB_CLIENT_ID as string, 
