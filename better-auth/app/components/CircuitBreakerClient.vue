@@ -8,29 +8,63 @@
       <div>
         {{ status }}
       </div>
+      <div>
+        <p>Error object</p>
+        <pre>
+          {{ errobj?.data }}
+        </pre>
+      </div>
+
+      <div>
+        <p>Server Fetch?</p>
+        {{ data }} // {{ error }}
+      </div>
     </div>
   </UCard>
 </template>
 
 <script setup lang="ts">
-const { $breaker } = useNuxtApp()
+const { $breaker, $callWithBreaker } = useNuxtApp()
 const result = ref('')
 const loading = ref(false)
 const status = ref()
+const errobj = ref()
 
+// 되긴하네...?
+const { data, error } = await useAsyncData('breaker-fetch', async () => {
+  return $callWithBreaker('hello-api', async () => $fetch('/api/circuit/hello'))
+  // return $fetch('/api/circuit/hello')
+})
+
+// 방법 1: 가장 간단한 사용법 
 const callApi = async () => {
   loading.value = true
   result.value = ''
 
-  const breaker = $breaker('hello-api', async() => await $fetch('/api/circuit/hello'))
-  status.value = breaker
-
-  breaker.fallback(() => ({ message: 'Fallback: API unavailable' }))
-
   try {
-    const res = await breaker.fire()
+    const res = await $callWithBreaker('hello-api', async () => $fetch('/api/circuit/hello'))
     result.value = res.message
   } catch (err: any) {
+    errobj.value = err
+    result.value = `에러: ${err.message || 'unknown'}`
+  } finally {
+    loading.value = false
+  }
+}
+
+// 방법 2: 상태 정보도 필요한 경우
+const callApiWithStatus = async () => {
+  loading.value = true
+  result.value = ''
+
+  const breakerWrapper = $breaker('hello-api', async () => $fetch('/api/circuit/hello'))
+  status.value = breakerWrapper.breaker // 상태 확인용
+
+  try {
+    const res = await breakerWrapper.execute()
+    result.value = res.message
+  } catch (err: any) {
+    errobj.value = err
     result.value = `에러: ${err.message || 'unknown'}`
   } finally {
     loading.value = false
