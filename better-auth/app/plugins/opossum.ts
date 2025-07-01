@@ -1,6 +1,7 @@
 import { defineNuxtPlugin } from '#app'
 import CircuitBreaker from 'opossum'
 
+// breakerMap관리가 힘들거 같다. TTL을 추가 하거나 컴포저블로 
 export default defineNuxtPlugin(() => {
   const breakerMap = new Map<string, CircuitBreaker>()
 

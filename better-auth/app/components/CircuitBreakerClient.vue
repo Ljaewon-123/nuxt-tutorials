@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCircuitBreaker } from '~/composables/useCircuitFetch'
+
 const { $breaker, $callWithBreaker } = useNuxtApp()
 const result = ref('')
 const loading = ref(false)
