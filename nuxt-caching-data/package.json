@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "crossws": "^0.4.1",
-    "nuxt": "^3.17.5",
+    "nuxt": "^4.0.0",
     "srvx": "^0.8.0",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1",
