@@ -6,9 +6,14 @@ const ws = sseAdapter({
     open(peer) {
       console.log(`👤 Peer connected: ${peer.id}`);
 
+      const reqUrl = peer.request?.url || '';
+      const headers = peer.request?.headers
+      const headerId = headers.get ? headers.get('x-crossws-id') : null;
+      console.log(reqUrl, headers)
+
       // 1초마다 메시지 전송
       const interval = setInterval(() => {
-        peer.send(`tick: ${new Date().toLocaleTimeString()}`);
+        peer.send(`tick: ${new Date().toLocaleTimeString()} + ${headerId}`);
       }, 1000);
 
       // 연결 종료 시 인터벌 정리
@@ -39,13 +44,16 @@ export default defineEventHandler(async (event) => {
   const crosswsId = getHeader(event, 'x-crossws-id');
 
   const parms = getRouterParams(event)
-  console.log(`test params ${parms.id}`)
+  console.log(`test params ${parms.id}`, crosswsId, 'ha?')
   const req = event.node.req
   if (accept === 'text/event-stream' || crosswsId) {
     const url = new URL(req.url!, `http://${req.headers.host}`);
     const request = new Request(url, {
       method: req.method,
-      headers: req.headers as HeadersInit,
+      headers: {
+        ...req.headers as HeadersInit,
+        'x-crossws-id': parms.id
+      },
     });
 
     return ws.fetch(request);
